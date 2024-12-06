@@ -1,9 +1,9 @@
-FROM gradle:jdk11
+FROM l.gcr.io/google/bazel:latest
 
-WORKDIR /app
+WORKDIR  /src/workspace
 
-ADD --chown=gradle:gradle /bin/ .
+COPY bin/ .
 
-RUN chmod -R +x *
+RUN bazel clean
 
-CMD ["gradle", "run"]
+CMD ["run", "//src/main:BazelApp"]
